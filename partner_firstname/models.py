@@ -85,12 +85,14 @@ class ResPartner(models.Model):
         When this method is called, :attr:`~.name` already has unified and
         trimmed whitespace.
         """
+        if name:
+            name = name.strip()
         # Company name goes to the lastname
         if is_company or not name:
             parts = [name or False, False]
         # Guess name splitting
         else:
-            parts = name.strip().split(" ", 1)
+            parts = name.split(" ", 1)
             while len(parts) < 2:
                 parts.append(False)
         return parts
